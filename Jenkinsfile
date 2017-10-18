@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
+                input "begin to clone?"
                 git 'https://github.com/chengjingtao/LoveFavorites.git'
             }
         }
