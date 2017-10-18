@@ -1,16 +1,34 @@
 pipeline {
     agent any
-    node() {
-    stage "clone"
-    git 'https://github.com/chengjingtao/LoveFavorites.git'
-   stage 'build'
-   sh "pwd"
-    sh "ls -l"
-   input "beging to build now !!!!??"
-   sh "echo this is build"
-   stage 'deploy'
-   sh 'echo this is deploy'
-   }
- 
+
+    stages {
+        stage('Clone') {
+            steps {
+                sh "pwd"
+                sh "ls -l"
+                git 'https://github.com/chengjingtao/LoveFavorites.git'
+                sh "pwd"
+                sh "ls -l"
+            }
+        }
+        stage('Build') {
+            steps {
+                sh "pwd"
+                sh "ls -l"
+                input "beging to build now !!!!??"
+                sh "make build"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'make test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
 }
 
